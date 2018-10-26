@@ -11,6 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes();
+
+Route::get( '/films/create', 'FilmController@create' )->name("films_create");
+Route::post( '/films/create', 'FilmController@store' );
+
+Route::get( '/', 'FilmController@index' )->name( 'home' );
+Route::get( '/{from_film_slug}/{film_slug}/films', 'FilmController@index' );
+Route::get( '/films', 'FilmController@index' );
+Route::get( '/films/{film_slug}', 'FilmController@details' );
+
+
+Route::group([ 'middleware' => 'auth' ], function( ){
+	Route::post( '/films/{film_slug}', 'CommentController@store' );
+} );

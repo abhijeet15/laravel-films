@@ -14,6 +14,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'allowed_image_ext' => 'jpeg,png,jpg',
+    'film_image_path' => 'img/films/',
 
     /*
     |--------------------------------------------------------------------------

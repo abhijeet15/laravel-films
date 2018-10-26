@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+// use Route;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -23,9 +25,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+
+        Route::bind('film_slug', function($key) {
+            return \App\Models\Film::with( [ "country", "genres", "comments" ] )->where('slug', $key)->firstOrFail();
+        });
+
     }
 
     /**

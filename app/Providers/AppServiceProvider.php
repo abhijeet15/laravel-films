@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \App\Models\Film::creating(function($model){
+            $model->slug = str_slug( $model->name );
+        });
     }
 
     /**
